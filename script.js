@@ -157,7 +157,7 @@ function SendDateToParent(data) {
   console.log('Parameter String:', paramString);
 
   let widgetURLBox = document.getElementById('widget-url');
-  widgetURLBox.value = getWidgetURL() + "?" + paramString;
+  widgetURLBox.value = GetWidgetURL() + "?" + paramString;
   window.parent.reloadWidget(paramString);
 }
 
@@ -185,22 +185,17 @@ saveButton.addEventListener('click', () => {
 
 
 
-function getWidgetURL() {
-  const urlParts = settingsJson.split('/');
+function GetWidgetURL() {
+  const url = window.location.href;
+  const parsedUrl = new URL(url);
 
-  // Remove the last part of the URL (the current page/file)
-  urlParts.pop();
+  let result = parsedUrl.origin; // Base domain (protocol + hostname + port)
 
-  // Remove the last part again to go one directory up
-  urlParts.pop();
+  const pathSegments = parsedUrl.pathname.split('/').filter(segment => segment); // Split and remove empty segments
 
-  // Reconstruct the URL
-  const parentUrl = urlParts.join('/');
-
-  // Ensure there's a trailing slash if necessary (if it was a directory)
-  if (urlParts.length > 2 && !parentUrl.endsWith('/')) {
-    return parentUrl + '/';
+  if (pathSegments.length > 0) {
+    result += '/' + pathSegments[0]; // Add the first path segment
   }
 
-  return parentUrl;
+  return result;
 }
