@@ -110,9 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
               inputElement.value = setting.defaultValue;
           }
 
-          inputElement.addEventListener('input', function (event) {
-            SendDateToParent(data);
-          });
+          // inputElement.addEventListener('input', function (event) {
+          //   SendDateToParent(data);
+          // });
 
           settingItemContent.appendChild(inputElement);
 
@@ -124,29 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
         settingsContent.appendChild(groupDiv);
       }
 
-      // saveButton.addEventListener('click', () => {
-      //   const settings = {};
-      //   data.settings.forEach(setting => {
-      //     let inputElement = document.getElementById(setting.id);
-
-      //     if (setting.type === 'checkbox') {
-      //       settings[setting.id] = inputElement.checked;
-      //     } else {
-      //       settings[setting.id] = inputElement.value;
-      //     }
-      //   });
-      //   // You can save the settings to localStorage, send them to a server, etc.
-      //   console.log('Saved settings:', settings);
-      //   localStorage.setItem('userSettings', JSON.stringify(settings));
-
-      //   // Generate parameter string
-      //   const paramString = Object.entries(settings)
-      //     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-      //     .join('&');
-
-      //   // console.log('Parameter String:', paramString);
-      //   window.parent.postMessage(paramString, "http://127.0.0.1:3006/index.html");
-      // });
+      saveButton.addEventListener('click', () => {
+        SendDateToParent(data);
+      });
       SendDateToParent(data);
     })
     .catch(error => console.error('Error loading settings:', error));
