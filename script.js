@@ -111,10 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
               inputElement.value = setting.defaultValue;
           }
 
-          // inputElement.addEventListener('input', function (event) {
-          //   if (autoReload)
-          //     SendDateToParent(data);
-          // });
+          inputElement.addEventListener('input', function (event) {
+            if (autoReload)
+              SendDateToParent(data);
+          });
 
           settingItemContent.appendChild(inputElement);
 
