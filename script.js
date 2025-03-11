@@ -2,6 +2,7 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
 const settingsJson = urlParams.get("settingsJson") || "";
+const autoReload = urlParams.get("autoReload") || true;
 
 document.addEventListener('DOMContentLoaded', () => {
   const settingsContent = document.getElementById('settings-content');
@@ -110,9 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
               inputElement.value = setting.defaultValue;
           }
 
-          // inputElement.addEventListener('input', function (event) {
-          //   SendDateToParent(data);
-          // });
+          inputElement.addEventListener('input', function (event) {
+            if (autoReload)
+              SendDateToParent(data);
+          });
 
           settingItemContent.appendChild(inputElement);
 
