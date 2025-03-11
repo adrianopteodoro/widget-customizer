@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
           inputElement.addEventListener('input', function (event) {
-            if (autoReload)
+            //if (autoReload)
               SendDateToParent(data);
           });
 
