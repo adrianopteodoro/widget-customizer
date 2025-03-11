@@ -124,9 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
         settingsContent.appendChild(groupDiv);
       }
 
-      saveButton.addEventListener('click', () => {
-        SendDateToParent(data);
-      });
+      // saveButton.addEventListener('click', () => {
+      //   SendDateToParent(data);
+      // });
       SendDateToParent(data);
     })
     .catch(error => console.error('Error loading settings:', error));
@@ -166,7 +166,6 @@ let saveButton = document.getElementById('save-settings');
 let widgetURLBox = document.getElementById('widget-url');
 
 saveButton.addEventListener('click', () => {
-
   navigator.clipboard.writeText(widgetURLBox.value);
 
   const defaultBackgroundColor = saveButton.style.backgroundColor;
