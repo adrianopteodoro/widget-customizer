@@ -183,11 +183,8 @@ saveButton.addEventListener('click', () => {
   }, 3000);
 });
 
-
-
 function GetWidgetURL() {
-  const url = window.location.href;
-  const parsedUrl = new URL(url);
+  const parsedUrl = new URL(settingsJson);
 
   let result = parsedUrl.origin; // Base domain (protocol + hostname + port)
 
