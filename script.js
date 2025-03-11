@@ -2,7 +2,6 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
 const settingsJson = urlParams.get("settingsJson") || "";
-const autoReload = urlParams.get("autoReload") || true;
 
 document.addEventListener('DOMContentLoaded', () => {
   const settingsContent = document.getElementById('settings-content');
@@ -112,8 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
           inputElement.addEventListener('input', function (event) {
-            if (autoReload)
-              SendDateToParent(data);
+            SendDateToParent(data);
           });
 
           settingItemContent.appendChild(inputElement);
@@ -157,5 +155,52 @@ function SendDateToParent(data) {
     .join('&');
 
   console.log('Parameter String:', paramString);
+
+  let widgetURLBox = document.getElementById('widget-url');
+  widgetURLBox.value = getWidgetURL() + "?" + paramString;
   window.parent.reloadWidget(paramString);
+}
+
+
+let saveButton = document.getElementById('save-settings');
+let widgetURLBox = document.getElementById('widget-url');
+
+saveButton.addEventListener('click', () => {
+
+  navigator.clipboard.writeText(widgetURLBox.value);
+
+  const defaultBackgroundColor = saveButton.style.backgroundColor;
+  const defaultTextColor = saveButton.style.color;
+
+  saveButton.innerText = "Copied to clipboard";
+  saveButton.style.backgroundColor = "#00dd63"
+  saveButton.style.color = "#ffffff";
+
+  setTimeout(() => {
+    saveButton.innerText = "Click to copy URL";
+    saveButton.style.backgroundColor = defaultBackgroundColor;
+    saveButton.style.color = defaultTextColor;
+  }, 3000);
+});
+
+
+
+function getWidgetURL() {
+  const urlParts = settingsJson.split('/');
+
+  // Remove the last part of the URL (the current page/file)
+  urlParts.pop();
+
+  // Remove the last part again to go one directory up
+  urlParts.pop();
+
+  // Reconstruct the URL
+  const parentUrl = urlParts.join('/');
+
+  // Ensure there's a trailing slash if necessary (if it was a directory)
+  if (urlParts.length > 2 && !parentUrl.endsWith('/')) {
+    return parentUrl + '/';
+  }
+
+  return parentUrl;
 }

@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+  <div class="pinned-header">
+    <h2>Widget URL</h2>
+    <input id="widget-url" type="text" readonly>
+    <button id="save-settings">Click to copy URL</button>
+  </div>
+
   <div class="settings-container">
-    <button id="save-settings">Save</button>
-    <!-- <h1>Settings</h1> -->
     <div id="settings-content"></div>
   </div>
   <script src="script.js"></script>
 </body>
+
 </html>
