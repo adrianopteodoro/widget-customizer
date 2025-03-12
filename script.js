@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const settingsContent = document.getElementById('settings-content');
   const saveButton = document.getElementById('save-settings');
 
-  fetch(settingsJson)
-  // fetch('settings.json')
+  //fetch(settingsJson)
+  fetch('settings.json')
     .then(response => response.json())
     .then(data => {
       const groupedSettings = {};
@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (option === setting.defaultValue) {
                   optionElement.selected = true;
                 }
+                inputElement.value = setting.defaultValue;
                 inputElement.appendChild(optionElement);
               });
               break;
