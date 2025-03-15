@@ -251,7 +251,7 @@ button:hover {
   position: fixed;
   left: 50%;
   top: 50%;
-  width: calc(100% - 50px);
+  width: calc(100% - 75px);
   border-radius: 0.5em;
   padding: 1em;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);

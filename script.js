@@ -197,17 +197,12 @@ function LoadSettings() {
   const url = new URL(loadURLBox.value);
   
   url.searchParams.forEach((value, key) => {
-    console.log(`Key: ${key}, Value: ${value}`);
 
     const inputElement = document.getElementById(key);
     if (inputElement != null)
     {
       if (inputElement.type == 'checkbox')
-      {
-        console.log(inputElement.value);
         inputElement.checked = value.toLocaleLowerCase() == 'true';
-        console.log(inputElement.value);
-      }
       else
         inputElement.value = value;
     }
