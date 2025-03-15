@@ -208,6 +208,8 @@ function LoadSettings() {
     }
   });
 
+  loadURLBox.value = '';
+
   let loadSettingsBox = document.getElementById('mommy-milkers');
   loadSettingsBox.style.display = 'none';
 }
