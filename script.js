@@ -147,9 +147,6 @@ function SendDateToParent(data) {
       settings[setting.id] = inputElement.value;
     }
   });
-  // You can save the settings to localStorage, send them to a server, etc.
-  console.log('Saved settings:', settings);
-  localStorage.setItem('userSettings', JSON.stringify(settings));
 
   // Generate parameter string
   const paramString = Object.entries(settings)
@@ -166,12 +163,13 @@ function SendDateToParent(data) {
 
 let saveButton = document.getElementById('save-settings');
 let widgetURLBox = document.getElementById('widget-url');
+let cancelSettingsButton = document.getElementById('cancel-settings');
 
 saveButton.addEventListener('click', () => {
   navigator.clipboard.writeText(widgetURLBox.value);
 
-  const defaultBackgroundColor = saveButton.style.backgroundColor;
-  const defaultTextColor = saveButton.style.color;
+  const defaultBackgroundColor = "#2e2e2e";
+  const defaultTextColor = "white";
 
   saveButton.innerText = "Copied to clipboard";
   saveButton.style.backgroundColor = "#00dd63"
@@ -183,6 +181,41 @@ saveButton.addEventListener('click', () => {
     saveButton.style.color = defaultTextColor;
   }, 3000);
 });
+
+widgetURLBox.addEventListener('click', () => {
+  let loadSettingsBox = document.getElementById('mommy-milkers');
+  loadSettingsBox.style.display = 'block';
+});
+
+function CloseSettings() {
+  let loadSettingsBox = document.getElementById('mommy-milkers');
+  loadSettingsBox.style.display = 'none';
+};
+
+function LoadSettings() {
+  let loadURLBox = document.getElementById('load-url');
+  const url = new URL(loadURLBox.value);
+  
+  url.searchParams.forEach((value, key) => {
+    console.log(`Key: ${key}, Value: ${value}`);
+
+    const inputElement = document.getElementById(key);
+    if (inputElement != null)
+    {
+      if (inputElement.type == 'checkbox')
+      {
+        console.log(inputElement.value);
+        inputElement.checked = value.toLocaleLowerCase() == 'true';
+        console.log(inputElement.value);
+      }
+      else
+        inputElement.value = value;
+    }
+  });
+
+  let loadSettingsBox = document.getElementById('mommy-milkers');
+  loadSettingsBox.style.display = 'none';
+}
 
 function GetWidgetURL() {
   const parsedUrl = new URL(settingsJson);
