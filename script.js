@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const settingsContent = document.getElementById('settings-content');
   const saveButton = document.getElementById('save-settings');
 
-  fetch(settingsJson)
-  //fetch('settings.json')
+  //fetch(settingsJson)
+  fetch('settings.json')
     .then(response => response.json())
     .then(data => {
       const groupedSettings = {};
@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
               inputElement.value = setting.defaultValue;
               inputElement.min = setting.min;
               inputElement.max = setting.max;
+              inputElement.step = setting.step;
               break;
             default:
               inputElement = document.createElement('input');
