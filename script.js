@@ -185,12 +185,14 @@ saveButton.addEventListener('click', () => {
 
 widgetURLBox.addEventListener('click', () => {
   let loadSettingsBox = document.getElementById('mommy-milkers');
-  loadSettingsBox.style.display = 'block';
+  loadSettingsBox.style.visibility = 'visible';
+  loadSettingsBox.style.opacity = 1;
 });
 
 function CloseSettings() {
   let loadSettingsBox = document.getElementById('mommy-milkers');
-  loadSettingsBox.style.display = 'none';
+  loadSettingsBox.style.visibility = 'hidden';
+  loadSettingsBox.style.opacity = 0;
 };
 
 function LoadSettings() {
@@ -212,7 +214,8 @@ function LoadSettings() {
   loadURLBox.value = '';
 
   let loadSettingsBox = document.getElementById('mommy-milkers');
-  loadSettingsBox.style.display = 'none';
+  loadSettingsBox.style.visibility = 'hidden';
+  loadSettingsBox.style.opacity = 0;
 }
 
 function GetWidgetURL() {
@@ -227,4 +230,8 @@ function GetWidgetURL() {
   }
 
   return result;
+}
+
+function OpenMembershipPage() {
+    window.open("https://nutty.gg/supporters/sign_in", '_blank').focus();
 }
