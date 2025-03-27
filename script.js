@@ -37,12 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
           const labelDescriptionDiv = document.createElement('div');
 
           const label = document.createElement('label');
-          label.textContent = i18next.t(`label.${setting.label}`);
+          label.textContent = i18next.t(`label.${setting.id}`); // Changed to setting.id
           labelDescriptionDiv.appendChild(label);
 
           if (setting.description) {
             const description = document.createElement('p');
-            description.textContent = i18next.t(`description.${setting.description}`);
+            description.textContent = i18next.t(`description.${setting.id}`); // Changed to setting.id
             labelDescriptionDiv.appendChild(description);
           }
 
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
               setting.options.forEach(option => {
                 const optionElement = document.createElement('option');
                 optionElement.value = option.value;
-                optionElement.textContent = i18next.t(`option.${option.label}`);
+                optionElement.textContent = i18next.t(`option.${setting.id}.${option.value}`); //chnaged to setting.id and option.value
                 if (option === setting.defaultValue) {
                   optionElement.selected = true;
                 }
