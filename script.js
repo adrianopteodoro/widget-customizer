@@ -96,10 +96,10 @@ function createInputElement(setting, data) {
       }
       break;
     case 'checkbox':
-      inputElement = createCheckboxElement(setting);
+      inputElement = createCheckboxElement(setting, data); // Pass `data` explicitly
       break;
     case 'select':
-      inputElement = createSelectElement(setting);
+      inputElement = createSelectElement(setting, data); // Pass `data` explicitly
       break;
     default:
       inputElement = document.createElement('input');
@@ -107,11 +107,11 @@ function createInputElement(setting, data) {
       inputElement.id = setting.id;
       inputElement.value = setting.defaultValue;
   }
-  inputElement.addEventListener('input', () => SendDateToParent(data));
+  inputElement.addEventListener('input', () => SendDateToParent(data)); // Pass `data` explicitly
   return inputElement;
 }
 
-function createCheckboxElement(setting) {
+function createCheckboxElement(setting, data) {
   const labelDiv = document.createElement('label');
   labelDiv.classList.add('switch');
 
@@ -127,12 +127,13 @@ function createCheckboxElement(setting) {
 
   labelDiv.addEventListener('click', () => {
     checkBoxElement.checked = !checkBoxElement.checked;
+    SendDateToParent(data); // Pass `data` explicitly to ensure it is in scope
   });
 
   return labelDiv;
 }
 
-function createSelectElement(setting) {
+function createSelectElement(setting, data) {
   const selectElement = document.createElement('select');
   selectElement.id = setting.id;
   setting.options.forEach(option => {
@@ -145,6 +146,8 @@ function createSelectElement(setting) {
     }
     selectElement.appendChild(optionElement);
   });
+
+  selectElement.addEventListener('change', () => SendDateToParent(data)); // Pass `data` explicitly
   return selectElement;
 }
 
