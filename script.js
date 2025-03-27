@@ -28,13 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderSettings(groupedSettings, settingsContent, data) {
   for (const groupName in groupedSettings) {
-    const groupDiv = createGroupDiv(groupName, groupedSettings[groupName]);
+    const groupDiv = createGroupDiv(groupName, groupedSettings[groupName], data);
     settingsContent.appendChild(groupDiv);
   }
   SendDateToParent(data);
 }
 
-function createGroupDiv(groupName, settings) {
+function createGroupDiv(groupName, settings, data) {
   const groupDiv = document.createElement('div');
   groupDiv.classList.add('setting-group');
 
@@ -44,14 +44,14 @@ function createGroupDiv(groupName, settings) {
   groupDiv.appendChild(groupHeader);
 
   settings.forEach(setting => {
-    const settingItem = createSettingItem(setting);
+    const settingItem = createSettingItem(setting, data);
     groupDiv.appendChild(settingItem);
   });
 
   return groupDiv;
 }
 
-function createSettingItem(setting) {
+function createSettingItem(setting, data) {
   const settingItem = document.createElement('div');
   settingItem.classList.add('setting-item');
 
@@ -70,7 +70,7 @@ function createSettingItem(setting) {
 
   const settingItemContent = document.createElement('div');
   settingItemContent.classList.add('setting-item-content');
-  const inputElement = createInputElement(setting);
+  const inputElement = createInputElement(setting, data);
   settingItemContent.appendChild(inputElement);
 
   settingItem.appendChild(labelDescriptionDiv);
@@ -79,7 +79,7 @@ function createSettingItem(setting) {
   return settingItem;
 }
 
-function createInputElement(setting) {
+function createInputElement(setting, data) {
   let inputElement;
   switch (setting.type) {
     case 'text':
