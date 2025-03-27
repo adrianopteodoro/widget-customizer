@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         groupDiv.classList.add('setting-group');
 
         const groupHeader = document.createElement('h2');
-        groupHeader.textContent = groupName;
+        groupHeader.textContent = i18next.t(`group.${groupName}`);
         groupDiv.appendChild(groupHeader);
 
         groupedSettings[groupName].forEach(setting => {
@@ -37,12 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
           const labelDescriptionDiv = document.createElement('div');
 
           const label = document.createElement('label');
-          label.textContent = setting.label;
+          label.textContent = i18next.t(`label.${setting.label}`);
           labelDescriptionDiv.appendChild(label);
 
           if (setting.description) {
             const description = document.createElement('p');
-            description.textContent = setting.description;
+            description.textContent = i18next.t(`description.${setting.description}`);
             labelDescriptionDiv.appendChild(description);
           }
 
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
               setting.options.forEach(option => {
                 const optionElement = document.createElement('option');
                 optionElement.value = option.value;
-                optionElement.textContent = option.label;
+                optionElement.textContent = i18next.t(`option.${option.label}`);
                 if (option === setting.defaultValue) {
                   optionElement.selected = true;
                 }
@@ -172,12 +172,12 @@ saveButton.addEventListener('click', () => {
   const defaultBackgroundColor = "#2e2e2e";
   const defaultTextColor = "white";
 
-  saveButton.innerText = "Copied to clipboard";
+  saveButton.innerText = i18next.t("button.copiedToClipboard");
   saveButton.style.backgroundColor = "#00dd63"
   saveButton.style.color = "#ffffff";
 
   setTimeout(() => {
-    saveButton.innerText = "Click to copy URL";
+    saveButton.innerText = i18next.t("button.clickToCopyURL");
     saveButton.style.backgroundColor = defaultBackgroundColor;
     saveButton.style.color = defaultTextColor;
   }, 3000);

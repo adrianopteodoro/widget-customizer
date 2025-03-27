@@ -1,0 +1,26 @@
+{
+    "en": {
+        "translation": {
+            "title": "Widget Settings",
+            "language_dropdown": "Select Language:",
+            "widget_url": "Widget URL",
+            "copy_url": "Click to copy URL",
+            "member_widgets": "💎 Member Exclusive Widgets",
+            "load_settings": "Load Settings From Widget URL",
+            "cancel": "Cancel",
+            "load": "Load Settings"
+        }
+    },
+    "pt": {
+        "translation": {
+            "title": "Configurações do Widget",
+            "language_dropdown": "Selecione o Idioma:",
+            "widget_url": "URL do Widget",
+            "copy_url": "Clique para copiar a URL",
+            "member_widgets": "💎 Widgets Exclusivos para Membros",
+            "load_settings": "Carregar Configurações do URL do Widget",
+            "cancel": "Cancelar",
+            "load": "Carregar Configurações"
+        }
+    }
+}
