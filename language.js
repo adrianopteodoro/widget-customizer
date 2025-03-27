@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Merge base and extra language resources
             const mergedResources = { ...baseResources, ...extraResources };
+            console.log("Merged Language Resources:", mergedResources); // Log merged language resources
 
             // Initialize i18next with merged resources
             i18next.use(i18nextBrowserLanguageDetector).init(
@@ -46,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         Object.keys(resources).forEach(lang => {
             const option = document.createElement("option");
             option.value = lang;
-            option.textContent = resources[lang].language_label || lang.toUpperCase(); // Use language_label or fallback to language code
+            option.textContent = i18next.getFixedT(lang)("language_label") || lang.toUpperCase(); // Use i18next to get language_label
             languageDropdown.appendChild(option);
         });
     }
