@@ -22,5 +22,41 @@
             "cancel": "Cancelar",
             "load": "Carregar Configurações"
         }
+    },
+    "es": {
+        "translation": {
+            "title": "Configuración del Widget",
+            "language_dropdown": "Seleccionar idioma:",
+            "widget_url": "URL del Widget",
+            "copy_url": "Haga clic para copiar la URL",
+            "member_widgets": "💎 Widgets Exclusivos para Miembros",
+            "load_settings": "Cargar Configuración desde la URL del Widget",
+            "cancel": "Cancelar",
+            "load": "Cargar Configuración"
+        }
+    },
+    "fr": {
+        "translation": {
+            "title": "Paramètres du Widget",
+            "language_dropdown": "Sélectionner la langue :",
+            "widget_url": "URL du Widget",
+            "copy_url": "Cliquez pour copier l'URL",
+            "member_widgets": "💎 Widgets Exclusifs pour les Membres",
+            "load_settings": "Charger les Paramètres depuis l'URL du Widget",
+            "cancel": "Annuler",
+            "load": "Charger les Paramètres"
+        }
+    },
+    "de": {
+        "translation": {
+            "title": "Widget-Einstellungen",
+            "language_dropdown": "Sprache auswählen:",
+            "widget_url": "Widget-URL",
+            "copy_url": "Klicken, um die URL zu kopieren",
+            "member_widgets": "💎 Exklusive Widgets für Mitglieder",
+            "load_settings": "Einstellungen von der Widget-URL laden",
+            "cancel": "Abbrechen",
+            "load": "Einstellungen laden"
+        }
     }
 }
