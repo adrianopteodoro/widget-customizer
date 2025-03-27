@@ -9,7 +9,13 @@
             "load_settings": "Load Settings From Widget URL",
             "cancel": "Cancel",
             "load": "Load Settings",
-            "language_label": "English"
+            "language_label": "English",
+            "button.copiedToClipboard": "Copied to Clipboard!",
+            "button.clickToCopyURL": "Click to copy URL",
+            "group.exampleGroup": "Example Group",
+            "label.exampleLabel": "Example Label",
+            "description.exampleDescription": "This is an example description.",
+            "option.exampleOption": "Example Option"
         }
     },
     "pt": {
@@ -22,7 +28,13 @@
             "load_settings": "Carregar Configurações do URL do Widget",
             "cancel": "Cancelar",
             "load": "Carregar Configurações",
-            "language_label": "Português"
+            "language_label": "Português",
+            "button.copiedToClipboard": "Copiado para a Área de Transferência!",
+            "button.clickToCopyURL": "Clique para copiar a URL",
+            "group.exampleGroup": "Grupo de Exemplo",
+            "label.exampleLabel": "Etiqueta de Exemplo",
+            "description.exampleDescription": "Esta é uma descrição de exemplo.",
+            "option.exampleOption": "Opção de Exemplo"
         }
     },
     "es": {
@@ -35,7 +47,13 @@
             "load_settings": "Cargar Configuración desde la URL del Widget",
             "cancel": "Cancelar",
             "load": "Cargar Configuración",
-            "language_label": "Español"
+            "language_label": "Español",
+            "button.copiedToClipboard": "¡Copiado al Portapapeles!",
+            "button.clickToCopyURL": "Haga clic para copiar la URL",
+            "group.exampleGroup": "Grupo de Ejemplo",
+            "label.exampleLabel": "Etiqueta de Ejemplo",
+            "description.exampleDescription": "Esta es una descripción de ejemplo.",
+            "option.exampleOption": "Opción de Ejemplo"
         }
     },
     "fr": {
@@ -48,7 +66,13 @@
             "load_settings": "Charger les Paramètres depuis l'URL du Widget",
             "cancel": "Annuler",
             "load": "Charger les Paramètres",
-            "language_label": "Français"
+            "language_label": "Français",
+            "button.copiedToClipboard": "Copié dans le Presse-papiers !",
+            "button.clickToCopyURL": "Cliquez pour copier l'URL",
+            "group.exampleGroup": "Groupe d'Exemple",
+            "label.exampleLabel": "Étiquette d'Exemple",
+            "description.exampleDescription": "Ceci est une description d'exemple.",
+            "option.exampleOption": "Option d'Exemple"
         }
     },
     "de": {
@@ -61,7 +85,13 @@
             "load_settings": "Einstellungen von der Widget-URL laden",
             "cancel": "Abbrechen",
             "load": "Einstellungen laden",
-            "language_label": "Deutsch"
+            "language_label": "Deutsch",
+            "button.copiedToClipboard": "In die Zwischenablage kopiert!",
+            "button.clickToCopyURL": "Klicken, um die URL zu kopieren",
+            "group.exampleGroup": "Beispielgruppe",
+            "label.exampleLabel": "Beispieletikett",
+            "description.exampleDescription": "Dies ist eine Beispieldescription.",
+            "option.exampleOption": "Beispieloption"
         }
     }
 }
