@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveButton = document.getElementById('save-settings');
 
   fetch(settingsJson)
-  //fetch('settings.json')
     .then(response => response.json())
     .then(data => {
       const groupedSettings = {};
@@ -22,119 +21,132 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       // Render settings for each group
-      for (const groupName in groupedSettings) {
-        const groupDiv = document.createElement('div');
-        groupDiv.classList.add('setting-group');
-
-        const groupHeader = document.createElement('h2');
-        groupHeader.textContent = UpdateTextContent(groupName); // Pass groupName as a key
-        groupDiv.appendChild(groupHeader);
-
-        groupedSettings[groupName].forEach(setting => {
-          const settingItem = document.createElement('div');
-          settingItem.classList.add('setting-item');
-
-          const labelDescriptionDiv = document.createElement('div');
-
-          const label = document.createElement('label');
-          label.textContent = UpdateTextContent(setting.label); // Pass setting.label as a key
-          labelDescriptionDiv.appendChild(label);
-
-          if (setting.description) {
-            const description = document.createElement('p');
-            description.textContent = UpdateTextContent(setting.description); // Pass setting.description as a key
-            labelDescriptionDiv.appendChild(description);
-          }
-
-          const settingItemContent = document.createElement('div');
-          settingItemContent.classList.add('setting-item-content');
-
-          let inputElement;
-          switch (setting.type) {
-            case 'text':
-              inputElement = document.createElement('input');
-              inputElement.type = 'text';
-              inputElement.id = setting.id; //Added setting ID
-              inputElement.value = setting.defaultValue;
-              break;
-            case 'checkbox':
-              const labelDiv = document.createElement('label');
-              labelDiv.classList.add('switch');
-              checkBoxElement = document.createElement('input');
-              checkBoxElement.type = 'checkbox';
-              checkBoxElement.id = setting.id;
-              checkBoxElement.checked = setting.defaultValue;
-              labelDiv.appendChild(checkBoxElement);
-
-              const slider = document.createElement('span');
-              slider.classList.add('slider');
-              slider.classList.add('round');
-              labelDiv.appendChild(slider);
-
-              // Add event listener to the switchDiv
-              labelDiv.addEventListener('click', () => {
-                checkBoxElement.checked = !checkBoxElement.checked;
-              });
-              inputElement = labelDiv;
-              break;
-            case 'select':
-              inputElement = document.createElement('select');
-              inputElement.id = setting.id; //Added setting ID
-              setting.options.forEach(option => {
-                const optionElement = document.createElement('option');
-                optionElement.value = option.value;
-                optionElement.textContent = UpdateTextContent(`option.${setting.id}.${option.value}`); // Pass option key
-                if (option === setting.defaultValue) {
-                  optionElement.selected = true;
-                }
-                inputElement.value = setting.defaultValue;
-                inputElement.appendChild(optionElement);
-              });
-              break;
-            case 'color':
-              inputElement = document.createElement('input');
-              inputElement.type = 'color';
-              inputElement.id = setting.id; //Added setting ID
-              inputElement.value = setting.defaultValue;
-              break;
-            case 'number':
-              inputElement = document.createElement('input');
-              inputElement.type = 'number';
-              inputElement.id = setting.id; //Added setting ID
-              inputElement.value = setting.defaultValue;
-              inputElement.min = setting.min;
-              inputElement.max = setting.max;
-              inputElement.step = setting.step;
-              break;
-            default:
-              inputElement = document.createElement('input');
-              inputElement.type = 'text';
-              inputElement.id = setting.id; //Added setting ID
-              inputElement.value = setting.defaultValue;
-          }
-
-          inputElement.addEventListener('input', function (event) {
-            SendDateToParent(data);
-          });
-
-          settingItemContent.appendChild(inputElement);
-
-          settingItem.appendChild(labelDescriptionDiv);
-          settingItem.appendChild(settingItemContent);
-          groupDiv.appendChild(settingItem);
-        });
-
-        settingsContent.appendChild(groupDiv);
-      }
-
-      // saveButton.addEventListener('click', () => {
-      //   SendDateToParent(data);
-      // });
-      SendDateToParent(data);
+      renderSettings(groupedSettings, settingsContent, data);
     })
     .catch(error => console.error('Error loading settings:', error));
 });
 
+function renderSettings(groupedSettings, settingsContent, data) {
+  for (const groupName in groupedSettings) {
+    const groupDiv = createGroupDiv(groupName, groupedSettings[groupName]);
+    settingsContent.appendChild(groupDiv);
+  }
+  SendDateToParent(data);
+}
+
+function createGroupDiv(groupName, settings) {
+  const groupDiv = document.createElement('div');
+  groupDiv.classList.add('setting-group');
+
+  const groupHeader = document.createElement('h2');
+  groupHeader.textContent = UpdateTextContent(groupName);
+  groupHeader.setAttribute('data-key', groupName);
+  groupDiv.appendChild(groupHeader);
+
+  settings.forEach(setting => {
+    const settingItem = createSettingItem(setting);
+    groupDiv.appendChild(settingItem);
+  });
+
+  return groupDiv;
+}
+
+function createSettingItem(setting) {
+  const settingItem = document.createElement('div');
+  settingItem.classList.add('setting-item');
+
+  const labelDescriptionDiv = document.createElement('div');
+  const label = document.createElement('label');
+  label.textContent = UpdateTextContent(setting.label);
+  label.setAttribute('data-key', setting.label);
+  labelDescriptionDiv.appendChild(label);
+
+  if (setting.description) {
+    const description = document.createElement('p');
+    description.textContent = UpdateTextContent(setting.description);
+    description.setAttribute('data-key', setting.description);
+    labelDescriptionDiv.appendChild(description);
+  }
+
+  const settingItemContent = document.createElement('div');
+  settingItemContent.classList.add('setting-item-content');
+  const inputElement = createInputElement(setting);
+  settingItemContent.appendChild(inputElement);
+
+  settingItem.appendChild(labelDescriptionDiv);
+  settingItem.appendChild(settingItemContent);
+
+  return settingItem;
+}
+
+function createInputElement(setting) {
+  let inputElement;
+  switch (setting.type) {
+    case 'text':
+    case 'color':
+    case 'number':
+      inputElement = document.createElement('input');
+      inputElement.type = setting.type;
+      inputElement.id = setting.id;
+      inputElement.value = setting.defaultValue;
+      if (setting.type === 'number') {
+        inputElement.min = setting.min;
+        inputElement.max = setting.max;
+        inputElement.step = setting.step;
+      }
+      break;
+    case 'checkbox':
+      inputElement = createCheckboxElement(setting);
+      break;
+    case 'select':
+      inputElement = createSelectElement(setting);
+      break;
+    default:
+      inputElement = document.createElement('input');
+      inputElement.type = 'text';
+      inputElement.id = setting.id;
+      inputElement.value = setting.defaultValue;
+  }
+  inputElement.addEventListener('input', () => SendDateToParent(data));
+  return inputElement;
+}
+
+function createCheckboxElement(setting) {
+  const labelDiv = document.createElement('label');
+  labelDiv.classList.add('switch');
+
+  const checkBoxElement = document.createElement('input');
+  checkBoxElement.type = 'checkbox';
+  checkBoxElement.id = setting.id;
+  checkBoxElement.checked = setting.defaultValue;
+  labelDiv.appendChild(checkBoxElement);
+
+  const slider = document.createElement('span');
+  slider.classList.add('slider', 'round');
+  labelDiv.appendChild(slider);
+
+  labelDiv.addEventListener('click', () => {
+    checkBoxElement.checked = !checkBoxElement.checked;
+  });
+
+  return labelDiv;
+}
+
+function createSelectElement(setting) {
+  const selectElement = document.createElement('select');
+  selectElement.id = setting.id;
+  setting.options.forEach(option => {
+    const optionElement = document.createElement('option');
+    optionElement.value = option.value;
+    optionElement.textContent = UpdateTextContent(`${setting.id}${option.value}`);
+    optionElement.setAttribute('data-key', `${setting.id}${option.value}`);
+    if (option.value === setting.defaultValue) {
+      optionElement.selected = true;
+    }
+    selectElement.appendChild(optionElement);
+  });
+  return selectElement;
+}
 
 // In the iframe's JavaScript:
 function SendDateToParent(data) {
