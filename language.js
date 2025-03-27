@@ -12,8 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Base Language Resources:", baseResources); // Log base language resources
             console.log("Extra Language Resources:", extraResources); // Log extra language resources
 
-            // Merge base and extra language resources
-            const mergedResources = { ...baseResources, ...extraResources };
+            // Deep merge base and extra language resources
+            const mergedResources = Object.keys(baseResources).reduce((acc, lang) => {
+                acc[lang] = { ...baseResources[lang], ...(extraResources[lang] || {}) };
+                return acc;
+            }, {});
             console.log("Merged Language Resources:", mergedResources); // Log merged language resources
 
             // Initialize i18next with merged resources
