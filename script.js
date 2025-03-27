@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         groupDiv.classList.add('setting-group');
 
         const groupHeader = document.createElement('h2');
-        groupHeader.textContent = i18next.t(`group.${groupName}`);
+        groupHeader.textContent = i18next.t(`${groupName}`);
         groupDiv.appendChild(groupHeader);
 
         groupedSettings[groupName].forEach(setting => {
@@ -37,12 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
           const labelDescriptionDiv = document.createElement('div');
 
           const label = document.createElement('label');
-          label.textContent = i18next.t(`label.${setting.id}`); // Changed to setting.id
+          label.textContent = i18next.t(`${setting.label}`);
           labelDescriptionDiv.appendChild(label);
 
           if (setting.description) {
             const description = document.createElement('p');
-            description.textContent = i18next.t(`description.${setting.id}`); // Changed to setting.id
+            description.textContent = i18next.t(`${setting.description}`);
             labelDescriptionDiv.appendChild(description);
           }
 
