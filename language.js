@@ -3,10 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const fetchLanguages = extraLanguageJson
         ? Promise.all([fetch('languages.json').then(res => res.json()), fetch(extraLanguageJson).then(res => res.json())])
-        : fetch('languages.json').then(res => res.json().then(resources => [resources]));
+        : fetch('languages.json').then(res => res.json().then(resources => [resources, {}])); // Ensure extraResources is an empty object
 
     fetchLanguages
         .then(([baseResources, extraResources]) => {
+            console.log("Base Language Resources:", baseResources); // Log base language resources
+            console.log("Extra Language Resources:", extraResources); // Log extra language resources
+
             const mergedResources = { ...baseResources, ...extraResources }; // Merge base and extra language resources
             i18next.use(i18nextBrowserLanguageDetector).init(
                 {
