@@ -158,14 +158,7 @@ function SendDateToParent(data) {
 
   let widgetURLBox = document.getElementById('widget-url');
   widgetURLBox.value = GetWidgetURL() + "?" + paramString;
-
-  // Send data to the parent window using postMessage
-  const message = {
-    type: 'reloadWidget', // Updated message type
-    params: paramString,
-    settings: settings
-  };
-  window.parent.postMessage(message, '*'); // Replace '*' with a specific origin for better security
+  window.parent.reloadWidget(paramString);
 }
 
 
