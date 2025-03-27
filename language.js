@@ -56,19 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function UpdateContent() {
-        document.title = i18next.t("title");
-        document.getElementById("title").innerText = i18next.t("title");
-        document.getElementById("language-dropdown-label").innerText =
-            i18next.t("language_dropdown");
-        document.getElementById("widget-url-label").innerText =
-            i18next.t("widget_url");
-        document.getElementById("save-settings").innerText = i18next.t("copy_url");
-        document.getElementById("member-widgets-button").innerText =
-            i18next.t("member_widgets");
-        document.getElementById("load-settings-title").innerText =
-            i18next.t("load_settings");
-        document.getElementById("cancel-settings").innerText = i18next.t("cancel");
-        document.getElementById("load-settings").innerText = i18next.t("load");
+        UpdateTextContent();
     }
 
     function ChangeLanguage() {
@@ -87,3 +75,22 @@ document.addEventListener("DOMContentLoaded", function () {
         languageDropdown.addEventListener("change", ChangeLanguage);
     }
 });
+
+function UpdateTextContent(key) {
+    if (key) {
+        return i18next.t(key); // Return the translated text for the given key
+    }
+
+    // Update static text content on the page
+    document.title = i18next.t("title");
+    document.getElementById("title").innerText = i18next.t("title");
+    document.getElementById("language-dropdown-label").innerText = i18next.t("language_dropdown");
+    document.getElementById("widget-url-label").innerText = i18next.t("widget_url");
+    document.getElementById("save-settings").innerText = i18next.t("copy_url");
+    document.getElementById("member-widgets-button").innerText = i18next.t("member_widgets");
+    document.getElementById("load-settings-title").innerText = i18next.t("load_settings");
+    document.getElementById("cancel-settings").innerText = i18next.t("cancel");
+    document.getElementById("load-settings").innerText = i18next.t("load");
+    document.getElementById("copied-to-clipboard").innerText = i18next.t("copiedToClipboard");
+    document.getElementById("click-to-copy-url").innerText = i18next.t("clickToCopyURL");
+}

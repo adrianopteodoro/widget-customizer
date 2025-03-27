@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         groupDiv.classList.add('setting-group');
 
         const groupHeader = document.createElement('h2');
-        groupHeader.textContent = i18next.t(`${groupName}`);
+        groupHeader.textContent = UpdateTextContent(groupName); // Pass groupName as a key
         groupDiv.appendChild(groupHeader);
 
         groupedSettings[groupName].forEach(setting => {
@@ -37,12 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
           const labelDescriptionDiv = document.createElement('div');
 
           const label = document.createElement('label');
-          label.textContent = i18next.t(`${setting.label}`);
+          label.textContent = UpdateTextContent(setting.label); // Pass setting.label as a key
           labelDescriptionDiv.appendChild(label);
 
           if (setting.description) {
             const description = document.createElement('p');
-            description.textContent = i18next.t(`${setting.description}`);
+            description.textContent = UpdateTextContent(setting.description); // Pass setting.description as a key
             labelDescriptionDiv.appendChild(description);
           }
 
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
               setting.options.forEach(option => {
                 const optionElement = document.createElement('option');
                 optionElement.value = option.value;
-                optionElement.textContent = i18next.t(`option.${setting.id}.${option.value}`); //chnaged to setting.id and option.value
+                optionElement.textContent = UpdateTextContent(`option.${setting.id}.${option.value}`); // Pass option key
                 if (option === setting.defaultValue) {
                   optionElement.selected = true;
                 }
@@ -172,12 +172,12 @@ saveButton.addEventListener('click', () => {
   const defaultBackgroundColor = "#2e2e2e";
   const defaultTextColor = "white";
 
-  saveButton.innerText = i18next.t("button.copiedToClipboard");
+  saveButton.innerText = UpdateTextContent("button.copiedToClipboard");
   saveButton.style.backgroundColor = "#00dd63"
   saveButton.style.color = "#ffffff";
 
   setTimeout(() => {
-    saveButton.innerText = i18next.t("button.clickToCopyURL");
+    saveButton.innerText = UpdateTextContent("button.clickToCopyURL");
     saveButton.style.backgroundColor = defaultBackgroundColor;
     saveButton.style.color = defaultTextColor;
   }, 3000);
@@ -235,3 +235,6 @@ function GetWidgetURL() {
 function OpenMembershipPage() {
     window.open("https://nutty.gg/supporters/sign_in", '_blank').focus();
 }
+
+// Call UpdateTextContent from language.js to update all text content
+UpdateTextContent();
