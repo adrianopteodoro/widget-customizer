@@ -1,16 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
     const extraLanguageJson = urlParams.get("extraLanguageJson"); // Get extra language JSON URL from query string
 
-    const fetchLanguages = extraLanguageJson
-        ? Promise.all([fetch('languages.json').then(res => res.json()), fetch(extraLanguageJson).then(res => res.json())])
-        : fetch('languages.json').then(res => res.json().then(resources => [resources, {}])); // Ensure extraResources is an empty object
+    // Fetch both base and extra language JSON concurrently
+    const fetchLanguages = Promise.all([
+        fetch('languages.json').then(res => res.json()),
+        extraLanguageJson ? fetch(extraLanguageJson).then(res => res.json()).catch(() => ({})) : Promise.resolve({})
+    ]);
 
     fetchLanguages
         .then(([baseResources, extraResources]) => {
             console.log("Base Language Resources:", baseResources); // Log base language resources
             console.log("Extra Language Resources:", extraResources); // Log extra language resources
 
-            const mergedResources = { ...baseResources, ...extraResources }; // Merge base and extra language resources
+            // Merge base and extra language resources
+            const mergedResources = { ...baseResources, ...extraResources };
+
+            // Initialize i18next with merged resources
             i18next.use(i18nextBrowserLanguageDetector).init(
                 {
                     supportedLngs: Object.keys(mergedResources),
@@ -19,7 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
                         caches: ['localStorage', 'cookie'],
                     },
-                    resources: mergedResources,
+                    resources: Object.fromEntries(
+                        Object.entries(mergedResources).map(([lang, resources]) => [lang, { translation: resources }])
+                    ),
                 },
                 function (err, t) {
                     if (err) {
@@ -39,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         Object.keys(resources).forEach(lang => {
             const option = document.createElement("option");
             option.value = lang;
-            option.textContent = i18next.getFixedT(lang)("language_label") || lang.toUpperCase();
+            option.textContent = resources[lang].language_label || lang.toUpperCase(); // Use language_label or fallback to language code
             languageDropdown.appendChild(option);
         });
     }
