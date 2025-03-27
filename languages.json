@@ -8,7 +8,8 @@
             "member_widgets": "💎 Member Exclusive Widgets",
             "load_settings": "Load Settings From Widget URL",
             "cancel": "Cancel",
-            "load": "Load Settings"
+            "load": "Load Settings",
+            "language_label": "English"
         }
     },
     "pt": {
@@ -20,7 +21,8 @@
             "member_widgets": "💎 Widgets Exclusivos para Membros",
             "load_settings": "Carregar Configurações do URL do Widget",
             "cancel": "Cancelar",
-            "load": "Carregar Configurações"
+            "load": "Carregar Configurações",
+            "language_label": "Português"
         }
     },
     "es": {
@@ -32,7 +34,8 @@
             "member_widgets": "💎 Widgets Exclusivos para Miembros",
             "load_settings": "Cargar Configuración desde la URL del Widget",
             "cancel": "Cancelar",
-            "load": "Cargar Configuración"
+            "load": "Cargar Configuración",
+            "language_label": "Español"
         }
     },
     "fr": {
@@ -44,7 +47,8 @@
             "member_widgets": "💎 Widgets Exclusifs pour les Membres",
             "load_settings": "Charger les Paramètres depuis l'URL du Widget",
             "cancel": "Annuler",
-            "load": "Charger les Paramètres"
+            "load": "Charger les Paramètres",
+            "language_label": "Français"
         }
     },
     "de": {
@@ -56,7 +60,8 @@
             "member_widgets": "💎 Exklusive Widgets für Mitglieder",
             "load_settings": "Einstellungen von der Widget-URL laden",
             "cancel": "Abbrechen",
-            "load": "Einstellungen laden"
+            "load": "Einstellungen laden",
+            "language_label": "Deutsch"
         }
     }
 }

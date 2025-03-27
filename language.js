@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (err) {
                         console.error('Error initializing i18next:', err);
                     } else {
+                        PopulateLanguageDropdown(resources);
                         InitializeLanguageDropdown();
                         UpdateContent();
                     }
@@ -23,6 +24,16 @@ document.addEventListener("DOMContentLoaded", function () {
             );
         })
         .catch(error => console.error('Error loading language resources:', error));
+
+    function PopulateLanguageDropdown(resources) {
+        const languageDropdown = document.getElementById("language-dropdown");
+        Object.keys(resources).forEach(lang => {
+            const option = document.createElement("option");
+            option.value = lang;
+            option.textContent = i18next.getFixedT(lang)("language_label") || lang.toUpperCase();
+            languageDropdown.appendChild(option);
+        });
+    }
 
     function UpdateContent() {
         document.title = i18next.t("title");

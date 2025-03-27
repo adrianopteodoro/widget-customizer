@@ -45,21 +45,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    fetch('languages.json')
-      .then(response => response.json())
-      .then(resources => {
-        const languageDropdown = document.getElementById('language-dropdown');
-        Object.keys(resources).forEach(lang => {
-          const option = document.createElement('option');
-          option.value = lang;
-          option.textContent = lang.toUpperCase();
-          languageDropdown.appendChild(option);
-        });
-      })
-      .catch(error => console.error('Error loading languages:', error));
-  </script>
 </body>
 
 </html>
