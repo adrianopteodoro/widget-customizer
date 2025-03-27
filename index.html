@@ -15,10 +15,7 @@
 <body>
   <div id="language-selector">
     <label id="language-dropdown-label" for="language-dropdown">Select Language:</label>
-    <select id="language-dropdown" onchange="ChangeLanguage()">
-      <option value="en">English</option>
-      <option value="pt">Português</option>
-    </select>
+    <select id="language-dropdown"></select>
   </div>
 
   <div id="pinned-header">
@@ -48,6 +45,21 @@
       </div>
     </div>
   </div>
+
+  <script>
+    fetch('languages.json')
+      .then(response => response.json())
+      .then(resources => {
+        const languageDropdown = document.getElementById('language-dropdown');
+        Object.keys(resources).forEach(lang => {
+          const option = document.createElement('option');
+          option.value = lang;
+          option.textContent = lang.toUpperCase();
+          languageDropdown.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Error loading languages:', error));
+  </script>
 </body>
 
 </html>
