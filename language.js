@@ -1,22 +1,28 @@
 document.addEventListener("DOMContentLoaded", function () {
-    fetch('languages.json')
-        .then(response => response.json())
-        .then(resources => {
+    const extraLanguageJson = urlParams.get("extraLanguageJson"); // Get extra language JSON URL from query string
+
+    const fetchLanguages = extraLanguageJson
+        ? Promise.all([fetch('languages.json').then(res => res.json()), fetch(extraLanguageJson).then(res => res.json())])
+        : fetch('languages.json').then(res => res.json().then(resources => [resources]));
+
+    fetchLanguages
+        .then(([baseResources, extraResources]) => {
+            const mergedResources = { ...baseResources, ...extraResources }; // Merge base and extra language resources
             i18next.use(i18nextBrowserLanguageDetector).init(
                 {
-                    supportedLngs: Object.keys(resources),
+                    supportedLngs: Object.keys(mergedResources),
                     fallbackLng: 'en',
                     detection: {
                         order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
                         caches: ['localStorage', 'cookie'],
                     },
-                    resources: resources,
+                    resources: mergedResources,
                 },
                 function (err, t) {
                     if (err) {
                         console.error('Error initializing i18next:', err);
                     } else {
-                        PopulateLanguageDropdown(resources);
+                        PopulateLanguageDropdown(mergedResources);
                         InitializeLanguageDropdown();
                         UpdateContent();
                     }
