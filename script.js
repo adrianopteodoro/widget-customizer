@@ -184,12 +184,12 @@ saveButton.addEventListener('click', () => {
   const defaultBackgroundColor = "#2e2e2e";
   const defaultTextColor = "white";
 
-  saveButton.innerText = UpdateTextContent("button.copiedToClipboard");
+  saveButton.innerText = UpdateTextContent("copiedToClipboard");
   saveButton.style.backgroundColor = "#00dd63"
   saveButton.style.color = "#ffffff";
 
   setTimeout(() => {
-    saveButton.innerText = UpdateTextContent("button.clickToCopyURL");
+    saveButton.innerText = UpdateTextContent("clickToCopyURL");
     saveButton.style.backgroundColor = defaultBackgroundColor;
     saveButton.style.color = defaultTextColor;
   }, 3000);
